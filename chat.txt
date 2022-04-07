@@ -1,0 +1,79 @@
+Najpierw wrzucamy klienta i serwer turo prosty, wrzucamy na gh 
+i robimy sobie code review
+
+server ma przyjmować wiadomość i wysyłać do wszystkich
+
+najpierw frontend potem backend
+
+
+Kiedyś serwery chatowe działały tak, że wysyłane były do nich gety, posty 
+i inne zapytania i odsyłały odpowiedz.
+
+short polling wysyałanie wielu zapytań co chwila i otrzymywanie natychmiastowych
+odpowiedzi
+
+long polling wysyłanie jednego zapytania i czekanie na odpowiedź
+
+websocet - klient wysyła request o połączenie i następuje połączenie dwukierunkowe stałe
+
+łączymy się z serverem coś typu const socker - await connect
+i potem idzie socket on np socket.on('message', data => cl(data);
+
+Musi być:
+
+
+CONNECT
+handle_incoming_message
+send_message (ON_ENTER_PRESS)
+add_message_to_list
+on_typing
+
+potrzebne będzie connecting state
+diwe funkcje on typing (on change) i add message to list
+
+WEBSOCKET
+
+Front end emituje chęć przyłączenia się do rooma, backend nasłuchuje i przyłącza
+
+Przykład przyłączenia:
+
+io.on("connection", socket => {
+  socket.join("some room");
+});
+
+And then simply use to or in (they are the same) when broadcasting or emitting:
+
+io.to("some room").emit("some event");
+
+You can emit to several rooms at the same time:
+
+
+io.to("room1").to("room2").to("room3").emit("some event");
+
+You can also broadcast to a room from a given socket:
+
+io.on("connection", function(socket){
+  socket.to("some room").emit("some event");
+});
+
+
+
+Each Socket in Socket.IO is identified by a random, unguessable, unique identifier Socket#id. 
+For your convenience, each socket automatically joins a room identified by its own id.
+
+
+io.on("connection", socket => {
+  socket.on("private message", (anotherSocketId, msg) => {
+    socket.to(anotherSocketId).emit("private message", socket.id, msg);
+  });
+});
+
+
+Two Fundamental abstractions:
+
+getter funkcja która nie przyjmuje parametrów ale coś zwraca
+setter przyjmuje parametry ale nic nie zwraca
+
+Andre Staltz
+
+wystawienie apki

@@ -1,0 +1,9 @@
+najperw instalacja jest
+
+npm i --save-dev jest
+
+stworzyć w root jest.config.js i wkleić
+
+module.exports = {
+  testEnvironment: 'node'
+};

@@ -1,0 +1,76 @@
+Rozwiązywanie zadania:
+
+1. Przeczytać całe zadanie w grupie od początku do końca;
+2. Zwracaj uwagę na jakość kodu;
+3. Często commituj;
+4. Jeśli myslisz, że coś można zrobić lepiej niż zasugerowano to rób i zgłaszaj to;
+********************
+* Zdefiniowaliśmy interfejsy
+
+zmiany
+likwidacja ekranu usera
+zmniejszenie danych na liście
+empty state na początku
+guzik searcha
+
+
+zabrakło: totalCount - liczba wyników
+sprawdź po zdjęciach interfejsy zabrakło interfejsu requesta
+
+cały proces nazwali ISearch
+jest klasą która ma metodę search
+
+search przyjmuje req: IRequest
+
+interface ISearch {
+
+search(req:IRequest) Promise<IResponse>
+}
+
+implementacja:
+
+zdefiniowali wspólnie mocka:
+
+implements mówi - ta klasa musi mieć takie same metody jak interfejs.
+zaimplementować to napisać ;)
+class SearchMock implements ISearch {
+search(request: ISearchRequest):Promise<ISearchResponse> {
+throw new Error('Not implemented')
+}
+}
+
+I teraz frontend robi tak:
+
+new SearchMock().search({query:'abc'}).then(()=> {})
+
+
+enum to tak naprawdę obiekt zwykły tylko z typami
+
+Część backendowa:
+
+1 co robimy to spełniamy kontrakt, chodzi o to ISearch 
+powinniśmy zamockować, udać, że zwracamy responsa i że dostaliśmy request
+
+Powinniśmy napisać najpierw test
+
+
+pierwszy test niech sprawdza czy w ogóle zwraca status 200
+
+importuje SearchRoute
+
+
+test('returns status 200', () => {
+SearchRoute({}, {})
+expect(  )
+
+})
+
+
+stworzyć interfejsy dla wszystkich zapytań, wykorzystaj do tego quicktype
+otypować trzeba później również co należy wysłać, czyli to q:string
+
+
+Popdsumowanie backendu:
+Stworzy klasę, która odpowiada tylko za komunikację z gitem, nagrywać kasety, obtestować i wszystko
+
+interfejsy > klasy > 

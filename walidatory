@@ -1,0 +1,13 @@
+Piszemy je po to żeby się właśnie wywalały i żeby dojść do tego jak
+interfejs powinien wyglądać
+
+endpoint - przyjmnie założony req i odpowie responsem
+
+w kodzie już odpalić walidację validate() - wyciągać dane z body
+
+import request z dto request
+
+const data = JSON.parse(req.body)
+const request = new Request()
+request.email = data.email
+validate()

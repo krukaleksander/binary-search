@@ -1,0 +1,40 @@
+Kata.
+
+Najpierw dążymy do pokrycia całego kodu testami - chodzi o code coverage
+
+npm run test -- --coverage
+
+wygeneruje się folderek coverage
+
+obejrzyj sobie na coverage/lcov-report/gilded-rose.ts.html
+
+1. mamy dodać kod
+
+Mamy itemki, które są w tablicy. Wszystkie itemki mają inną datę ważności sellIn.
+następna cecha to quality - jakość przedmiotu na dzień dzisiejszy.
+Jak sellIn spadnie do 0 to dla brie rośnie podwójnie quality, a dla innych spada podwójnie.
+ Na koniec każdego dnia obie te wartości się zmieniają.
+Dla różnych przedmiotów różnie się to odbywa.
+Dla każdego przemiotu oprócz sulfurasu sellIn  spada o 1. Quality nie może być poniżej zera
+
+
+mamy dodać nowy itemek conjured - ma dwa razy szybciej się degradować w quality.
+
+jest jeszcze backstagepass 
+
+
+open/close add new behavior without editing existing code
+make small objects, with precice responsibility
+
+należy tworzyć abstrakcję
+
+lepsza jest duplikacja niż zła abstrakcja
+
+jeśli jesteśmy pewni abstrakcji to dopiero z niej korzystajmy
+
+logikę biznesową i dane należy wiązać w obiekcie
+
+
+klasy abstrakcyjne:
+klasa abstrakcyjna to taka na której nie można zawołać new
+

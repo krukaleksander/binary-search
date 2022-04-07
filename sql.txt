@@ -1,0 +1,130 @@
+Bazy relacyjne SQL 
+
+sqlite3 - konkretnie to mam
+
+masz jeden plik i w nim jest cała baza danych
+
+SQL - structured query language
+
+nowa baza danych: sqlite3e i nazwa bazy: sqlite lesson.db
+
+.tables - jakie mamy tabele
+
+Za pomocą tego języka możemy querować, czyli pobierać dane
+
+Deklarujemy tabele CREATE TABLE CITIES(ID INT PRIMARY KEY NOT NULL);
+
+pamiętaj o średniku!
+
+.schema CITIES - możesz sprawdzić jaką masz scheme tej tablicy
+
+INSERT INTO CITIES (ID) VALUES(1); - dodawanie elementu
+
+SELECT * FROM CITIES; - Pobierz wszystko z tabeli
+
+DELETE FROM CITIES - usuwa wszystko z tablicy
+
+SELECT ID FROM CITIES; - wybierz kolumnę id z cities
+SELECT ID FROM CITIES WHERE ID = 3; - pobierz tylko element kiedy id jest 3
+ALTER TABLE CITIES - ZAKTUALIZUJ TABLICĘ CITIES I ENTER MOŻNA NACISNĄĆ
+ADD COLUMN name text NOT NULL; - dodaj koulmnę, która nie jest nullem. Pamiętaj, że
+nie może być innych rekordów w bazie
+
+INSERT INTO CITIES VALUES (1, 'WARSZAWA') - do kolumny id pójdzie numer a do name 
+Warszawa
+INSERT INTO CITIES (NAME, ID) VALUES ('GDYNIA', 2); - MOŻNA ZAMIENIĆ MIEJSCAMI
+
+SELECT ID, NAME FROM CITIES
+
+MOŻNA DODAC DEFAULT 0 - I WEJDZIE DEFAULTOWA WARTOŚĆ
+
+UPDATE CITIES SET population = 1800000 WHERE name = 'Warszawa';
+SELECT * FROM CITIES WHERE population > 125000
+SELECT * FROM CITIES WHERE population > 125000 AND name LIKE 'W%'; - KIEDY IMIĘ ZACZYNA SIĘ NA W
+
+SQL definiuje co jak wygląda, ale jest wiele implementacji - np. sqlite, postgress, mysql, oracledb itp
+pracując z daną implementacją czytaj jej dokumentację, bo one wzajemnie się różnią
+
+jeśli nie znajdzie sql rekordu to zwróci pustą tablicę
+
+tworząc można podać od razu wiele kolumn:
+
+CREATE TABLE CITIZENS (
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL
+)
+;
+
+SELECT * FROM CITIZENS JOIN CITIES ON CITIZENS.city_id = CITIES.id WHERE CITIES/name  = 'Warszawa'
+
+
+SELECT CITIZENS.name FROM CITIZENS JOIN CITIES ON CITIZENS.city_id = CITIES.id WHERE CITIES.name  = 'Warszawa'
+
+GRUPOWANIE............FUNKCJE AGREGUJĄCE
+
+SELECT name, age FROM CITIZENS GROUP BY age; - zwróci tylko po jednym pasującym rekordzie
+
+W SQL ZAWSZE TRZYMAMY TABLICĘ I ZWRACAMY TABLICĘ!!!!!!!!!!!!!!!!!
+W SQL NIE ZWRÓCIMY ZAGNIEŻDŻONYCH TABLIC - TO ZNACZY MOŻNA ALE NARAZIE TEGO NIE ROBIMY ;)
+
+SELECT name, MIN(age) FRMO CITIZENS GROUP BY name; - wybież imię i wiek minimalny z citizenów, pogrupuj
+po imieniu
+
+funkcja sum() by zsumowała wiek
+
+
+serwis HackerRank
+
+distinct(CITY) - UNIKALNE MIASTA
+
+SELECT COUNT(CITY) - COUNT(DISTINCT CITY) FROM STATION - POLICZ COUNT CITY MINUS POLICZ UNIKALNE CITY 
+
+
+filtrowanie:
+
+
+SELECT * FROM CITIES ORDER BY population - stortowanie po alfabecie, mała litera przed dużą
+
+
+SELECT distinct(CITY) FROM STATION WHERE REGEXP_LIKE(CITY,'^[aeiou]'); - PRZYKŁAD UŻYCIA REGEX
+
+'[aeiou]$' - DLA OSTATNIEJ LITERY
+
+
+
+
+SELECT
+  CASE 
+    WHEN A + B <= C or A + C <= B or B + C <= A THEN 'Not A Triangle'
+    WHEN A = B and B = C THEN 'Equilateral'
+    WHEN A = B or A = C or B = C THEN 'Isosceles'
+    WHEN A <> B and B <> C THEN 'Scalene'
+  END tuple
+FROM TRIANGLES;
+
+
+
+SELECT NAME FROM STUDENTS WHERE MARKS > 75  ORDER BY RIGHT(NAME, 3) ASC, ID ASC - SORTOWANIE NAJPIERW PO TRZECH OSTATNICH LITERACH A POTEM PO ID
+
+SELECT ROUND(AVG(salary)) - ROUND((AVG(REPLACE(salary, '0', '')))) FROM employees;
+
+
+INDEKSY_________________________________________
+
+TAK JAK W BIBLIOTECE - INDEKS MA SŁUŻYĆ DO TEGO ŻEBY ZNALEŹĆ COŚ SZYBCIEJ
+
+proces przeszukiwania rekordów w poszukiwaniu jednego to tak zwany sekwencyjny skan. Im wiekszy zbiór tym bardziej skan będzie kosztowny
+złożoność obliczeniowa zależy wprost od liczby rekordów
+
+seqscan = n - złożoność obliczeniowa równa liczbie rekordów
+
+wyszukiwanie binarne -> kroisz na pół posortowane elementy
+
+w bazie danych możesz tworzyć posortowane indeksy
+
+primary key - w kolejności tego klucza sortują się elementy z autoincrement sam nadaje id
+
+można też wyszukiwać po innych polach podobną metodą. Doda się index do innej wartości i będzie można to posortować. 
+dodawanie kolejnych rekordów i usuwanie spowalnia się przez to, że tworza się kolejne tabele zajmuje też to niepotrzebnie pamięć
+
+

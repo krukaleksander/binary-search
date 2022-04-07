@@ -1,0 +1,14 @@
+Robimy bez szczegółowych instrukcji, jak staniemy to mamy pytać 
+
+Hubert, Ania, Ja
+
+Wysłanie ankiety na pozostawiony email
+
+! NExt.js typescript
+
+formularz wysyła request - api endpoint - przesyła tylko maila 
+nodemailerem przez sendgrid
+w treści maila ma być możliwość zsubmitowania oceny w skali od 1-5 warsztatu
+
+dowiedzieć się jak dostarczyć style do nodemailera
+
