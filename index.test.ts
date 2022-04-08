@@ -1,12 +1,21 @@
+// przepisz to na operacje tylko na indexach - TDD ofc
+
 class BinarySearch {
-  index: number;
+  id: number;
   db: IDb[];
-  constructor(index: number, db: IDb[]) {
-    (this.index = index), (this.db = db);
+  constructor(id: number, db: IDb[]) {
+    (this.id = id), (this.db = db);
   }
   go() {
     let left = this.db.slice(0, Math.floor((this.db.length + 1) / 2));
     let right = this.db.slice(Math.floor((this.db.length + 1) / 2));
+
+    let lastLeftId = left[left.length - 1].id;
+    if (lastLeftId === this.id) {
+      return left[left.length - 1];
+    } else if (lastLeftId > this.id) {
+      left = left.slice(0, Math.floor((left.length + 1) / 2));
+    }
   }
 }
 
@@ -16,13 +25,22 @@ interface IDb {
 }
 
 describe("BinarySearch", () => {
-  it("returns 1 when 2 and [1,2,3,4] is passed", () => {
+  it("returns second object when 4 objects are passed and id 2", () => {
     const search = new BinarySearch(2, [
       { id: 1, name: "Michał" },
       { id: 2, name: "Alex" },
       { id: 3, name: "Monika" },
       { id: 4, name: "Krystian" },
     ]);
-    expect(search.go()).toBe(1);
+    expect(search.go()).toEqual({ id: 2, name: "Alex" });
+  });
+  it("returns first object when 4 objects are passed and id 1", () => {
+    const search = new BinarySearch(4, [
+      { id: 1, name: "Michał" },
+      { id: 2, name: "Alex" },
+      { id: 3, name: "Monika" },
+      { id: 4, name: "Krystian" },
+    ]);
+    expect(search.go()).toEqual({ id: 2, name: "Alex" });
   });
 });
