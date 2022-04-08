@@ -8,7 +8,14 @@ class BinarySearch {
     let firstElement = 0;
     let lastElement = this.db.length;
     let range = firstElement + lastElement;
-    if (Math.floor(range / 2) === this.id) return this.db[this.id - 1];
+    let centerOFArray = Math.floor(range / 2);
+    if (centerOFArray === this.id) return this.db[this.id - 1];
+    if (centerOFArray < this.id) {
+      firstElement = this.id;
+      range = firstElement + lastElement;
+      centerOFArray = Math.floor(range / 2);
+      if (centerOFArray === this.id) return this.db[this.id - 1];
+    }
   }
 }
 interface IDb {
@@ -26,13 +33,13 @@ describe("BinarySearch", () => {
     ]);
     expect(search.go()).toEqual({ id: 2, name: "Alex" });
   });
-  it("returns first object when 4 objects are passed and id 1", () => {
-    const search = new BinarySearch(4, [
+  it("returns third object when 4 objects are passed and id 3", () => {
+    const search = new BinarySearch(3, [
       { id: 1, name: "Michał" },
       { id: 2, name: "Alex" },
       { id: 3, name: "Monika" },
       { id: 4, name: "Krystian" },
     ]);
-    expect(search.go()).toEqual({ id: 2, name: "Alex" });
+    expect(search.go()).toEqual({ id: 3, name: "Monika" });
   });
 });
