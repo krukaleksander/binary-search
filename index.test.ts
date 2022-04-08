@@ -1,5 +1,3 @@
-// przepisz to na operacje tylko na indexach - TDD ofc
-
 class BinarySearch {
   id: number;
   db: IDb[];
@@ -7,18 +5,12 @@ class BinarySearch {
     (this.id = id), (this.db = db);
   }
   go() {
-    let left = this.db.slice(0, Math.floor((this.db.length + 1) / 2));
-    let right = this.db.slice(Math.floor((this.db.length + 1) / 2));
-
-    let lastLeftId = left[left.length - 1].id;
-    if (lastLeftId === this.id) {
-      return left[left.length - 1];
-    } else if (lastLeftId > this.id) {
-      left = left.slice(0, Math.floor((left.length + 1) / 2));
-    }
+    let firstElement = 0;
+    let lastElement = this.db.length;
+    let range = firstElement + lastElement;
+    if (Math.floor(range / 2) === this.id) return this.db[this.id - 1];
   }
 }
-
 interface IDb {
   id: number;
   name: string;
