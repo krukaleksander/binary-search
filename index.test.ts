@@ -42,4 +42,22 @@ describe("BinarySearch", () => {
     ]);
     expect(search.go()).toEqual({ id: 3, name: "Monika" });
   });
+  it("returns last object when 4 objects are passed and id 4", () => {
+    const search = new BinarySearch(4, [
+      { id: 1, name: "Michał" },
+      { id: 2, name: "Alex" },
+      { id: 3, name: "Monika" },
+      { id: 4, name: "Krystian" },
+    ]);
+    expect(search.go()).toEqual({ id: 4, name: "Krystian" });
+  });
+  it("returns first object when 4 objects are passed and id 1", () => {
+    const search = new BinarySearch(1, [
+      { id: 1, name: "Michał" },
+      { id: 2, name: "Alex" },
+      { id: 3, name: "Monika" },
+      { id: 4, name: "Krystian" },
+    ]);
+    expect(search.go()).toEqual({ id: 1, name: "Michał" });
+  });
 });
